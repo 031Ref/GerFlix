@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "Usuario.h"
 
@@ -31,13 +34,54 @@ void inicializarUsuariosHardCode(eUsuario usuarios[])
         strcpy(usuarios[i].nombre, nombre[i]);
 
     }
+}
 
+void mostrarListaUsuarios(eUsuario usuarios[], int cant)
+{
+    int i;
+    for(i=0; i<cant; i++)
+    {
+        if(usuarios[i].estado==1)
+        {
+            printf("%d %s\n", usuarios[i].idUsuario, usuarios[i].nombre);
+        }
+    }
+}
 
+void mostrarUsuarioConSuSerie(eUsuario usuarios[], int cantU, eSerie series[], int cantS)
+{
+    int i, j;
+    for(i=0; i<cantU; i++)
+    {
+        if(usuarios[i].estado==1)
+        {
+            printf("%d %s ", usuarios[i].idUsuario, usuarios[i].nombre);
+            for(j=0; j<cantS; j++)
+            {
+                if(usuarios[i].idSerie==series[j].idSerie)
+                {
+                    printf("%d %s\n",series[j].idSerie, series[j].nombre);
+                }
+            }
+        }
+    }
+}
 
-
-
-
-
-
-
+void mostrarSerieConUsuarios(eSerie series[], int cantS, eUsuario usuarios[], int cantU)
+{
+    int i, j;
+    for(i=0; i<cantS; i++)
+    {
+        if(series[i].estado==1)
+        {
+            printf("%d %s:\n",series[i].idSerie, series[i].nombre);
+            for(j=0; j<cantU; j++)
+            {
+                if(series[i].idSerie==usuarios[j].idSerie && usuarios[j].estado==1)
+                {
+                    printf("\t%d %s\n", usuarios[j].idUsuario, usuarios[j].nombre);
+                }
+            }
+        }
+    }
 }
